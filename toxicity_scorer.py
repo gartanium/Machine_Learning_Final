@@ -15,6 +15,10 @@ clf = pickle.load(open(filename, 'rb'))
 print("Successfully loaded model from disk")
 
 print("Attempting to load file..")
+df_youtube_videos = pd.read_pickle("US_Videos_Unclean")
+print("Loaded pickled file")
+
+print("Attempting to load file..")
 df = pd.read_pickle("US_Comments_Unclean")
 print("Loaded pickled file")
 
@@ -25,10 +29,34 @@ scores_list = list()
 score = 0
 id_old = id_column[0]
 id_new = id_column[0]
+comment_count = 0
 
 # Cycle through every row
 for i in range(length):
     # Check to see if the new ID is equal to the old ID
-    if id_old == id_new:
-        temp_score = clf.predict()
+    print(i)
+    id_new = id_column[i]
+    temp_score = clf.predict(comment_column[i])
+    score += temp_score
+    comment_count += 1
+
+    if id_old != id_new:
+      score = score / comment_count
+      scores_list.append(score)
+      score = 0
+      comment_count = 0
+      id_old = id_new
+
+
+video_count_const = 7998
+
+if len(scores_list) != video_count_const:
+    print("ERROR JAROM MESSUED UP SOMEWHERE")
+
+df_youtube_videos['toxicity_score'] = scores_list
+
+print("Pickling file")
+df_youtube_videos.to_pickle("US_Videos_Score_Added_Unclean")
+print("Finished Pickling File")
+
 
