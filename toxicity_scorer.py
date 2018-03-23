@@ -32,13 +32,23 @@ id_new = id_column[0]
 comment_count = 0
 
 # Cycle through every row
-for i in range(length):
+for i in range(2, length):
     # Check to see if the new ID is equal to the old ID
-    print(i)
-    id_new = id_column[i]
-    temp_score = clf.predict(comment_column[i])
-    score += temp_score
-    comment_count += 1
+
+    if not isinstance(comment_column[i], basestring):
+        temp_score = 0
+        comment_count += 1
+        score+= temp_score
+        print(i)
+    else:
+
+        id_new = id_column[i]
+        temp_score = clf.predict([comment_column[i]])
+        score += temp_score
+        comment_count += 1
+
+
+
 
     if id_old != id_new:
       score = score / comment_count
