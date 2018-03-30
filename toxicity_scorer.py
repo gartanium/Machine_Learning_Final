@@ -33,14 +33,11 @@ score = 0
 id_old = id_column[0]
 id_new = id_column[0]
 comment_count = 0
-scores_list = list()
-video_id_column = df_youtube_videos['video_id']
 
 
 # Cycle through every row
 for i in range(2, length):
     # Check to see if the new ID is equal to the old ID
-
     if not isinstance(comment_column[i], basestring):
         temp_score = 0.0
         comment_count += 1.0
@@ -59,28 +56,7 @@ for i in range(2, length):
         score += temp_score
         comment_count += 1.0
 
-
-#length = len(video_id_column)
-dict_id_values = scores_dict.values()
-
-# For every ID in the youtube video ID column
-for i in range(length):
-    current_id = video_id_column[i]
-    if current_id in dict_id_values:
-        scores_list.append(scores_dict[current_id])
-    else:
-        scores_list.append(0) # FOr now we will assume 0 comments means 0 toxcity.
-
-df_youtube_videos['video_scores'] = scores_list
-
-print("Length of scores: ", len(scores_dict))
-
-if len(scores_dict) != 7998:
-    print("ERROR JAROM MESSUED UP SOMEWHERE")
-
-df_youtube_videos['toxic_scores'] = scores_dict
-
-print("Pickling file")
-df_youtube_videos.to_pickle("US_Videos_Score_Added_Unclean")
-print("Finished Pickling File")
-
+print("Finished scoring list. Size: ", len(scores_dict))
+print("Beginning pickleing file")
+pickle.dump( scores_dict, open( "scores_dict.p", "wb" ) )
+print("Finished Pickleing file")
