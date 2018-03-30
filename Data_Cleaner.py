@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 
 print("Attempting to load file..")
-df = pd.read_pickle("US_Videos_Unclean")
+df = pd.read_pickle("US_Videos_Score_Added_Unclean")
 print("Loaded pickled file")
 
 
