@@ -11,8 +11,6 @@ reddit = praw.Reddit(client_id='Fn7V-T4nmOdYrw',
                      username='waldo1478')
 
 print(reddit.user.me())
-# ASKREDDIT-WORLDNEWS-VIDEOS-FUNNY-TODAYILEARNED-PICS-GAMING-MOVIES-NEWS-GIFS-MILDLYINTERESTING-\
-# AWW-SHOWERTHOUGHTS-TELEVISION-JOKES-SCIENCE-OLDSCHOOLCOOL-SPORTS-IAMA
 subreddits = ['askreddit', 'worldnews', 'videos', 'funny', 'todayilearned', 'pics', 'gaming']
 # subreddits = ['askreddit', 'worldnews', 'videos', 'funny', 'todayilearned', 'pics', 'gaming', 'movies', 'news', 'gifs', 'midlyinteresting', 'aww', 'showerthoughts', 'television', 'jokes', 'science', 'oldschoolcool', 'sports', 'iama']
 # subreddits['funny', 'DIY', 'pics', 'gaming', 'upliftingnews', 'sports', 'dataisbeautiful', 'aww', 'tifu']
@@ -28,7 +26,7 @@ filename = 'finalized_model.sav'
 clf = pickle.load(open(filename, 'rb'))
 
 for subreddit in subreddits:
-    submissions = reddit.subreddit(subreddit).top(limit=10)
+    submissions = reddit.subreddit(subreddit).top(limit=5)
     print('---------------------------------------------')
     print(subreddit)
     for submission in submissions:
