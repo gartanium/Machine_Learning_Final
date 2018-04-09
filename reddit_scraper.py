@@ -26,7 +26,7 @@ filename = 'finalized_model.sav'
 clf = pickle.load(open(filename, 'rb'))
 
 for subreddit in subreddits:
-    submissions = reddit.subreddit(subreddit).top(limit=5)
+    submissions = reddit.subreddit(subreddit).top(limit=2)
     print('---------------------------------------------')
     print(subreddit)
     for submission in submissions:
